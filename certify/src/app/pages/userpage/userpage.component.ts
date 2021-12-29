@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component, Input, OnInit } from '@angular/core';
+import { User } from 'src/app/models/user';
+import { UserService } from 'src/app/services/user.service';
+
+
+
 
 @Component({
   selector: 'app-userpage',
@@ -7,9 +13,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserpageComponent implements OnInit {
 
-  constructor() { }
+  user!: User;
 
-  ngOnInit(): void {
+  constructor(private userService: UserService) {}
+
+  ngOnInit() {
+    this.getUser();
+  }
+
+  getUser(): void {
+    this.userService.getUser().subscribe(
+      (response: User) => {
+        this.user = response;
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
   }
 
 }
