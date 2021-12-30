@@ -1,8 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
-import { Employer } from 'src/app/models/employer';
-import { User } from 'src/app/models/user';
-import { EmployerService } from 'src/app/services/employer.service';
+import { User, Employer } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -14,15 +12,15 @@ export class EmployerComponent implements OnInit {
   employer!: Employer;
   users!: User[];
 
-  constructor(private employerService: EmployerService, private userService: UserService) { }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.getUser();
+    this.getUsers();
     this.getEmployer();
   }
 
   getEmployer(): void {
-    this.employerService.getEmployer().subscribe(
+    this.userService.getEmployer().subscribe(
       (response: Employer) => {
         this.employer = response;
         console.log(this.employer);
@@ -33,8 +31,8 @@ export class EmployerComponent implements OnInit {
     );
   }
 
-  getUser(): void {
-    this.userService.getUser().subscribe(
+  getUsers(): void {
+    this.userService.getUsers().subscribe(
       (response: User[]) => {
         this.users = response;
         console.log(this.users);
@@ -60,7 +58,7 @@ export class EmployerComponent implements OnInit {
     }
     this.users = results;
     if (results.length === 0 || !key) {
-      this.getUser();
+      this.getUsers();
     }
   }
 
