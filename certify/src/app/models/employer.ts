@@ -1,9 +1,8 @@
-export interface User {
+export interface Employer {
     id: number;
     firstname: string;
     lastname: string;
-    phone: number;
-    email: string;
+    age: number;
     address: string;
     imageUrl: string;
 }
