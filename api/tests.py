@@ -45,13 +45,3 @@ class LearnerTestCase(TestCase):
     saved_learners = Learner.objects.all()
     self.assertTrue(len(saved_learners)==0)
     
-    # learner_reg_no = models.CharField(max_length=30)
-    # learner_first_name = models.CharField(max_length=10)
-    # learner_second_name = models.CharField(max_length=10, blank=True)
-    # learner_last_name = models.CharField(max_length=10)
-    # course_taken = models.CharField(max_length=30)
-    # date_enrolled = models.DateTimeField()
-    # date_completed = models.DateTimeField()
-    # grade_attained = models.CharField(max_length=20)
-    # certificate_image = CloudinaryField('image')
-    # institution
