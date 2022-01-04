@@ -24,9 +24,28 @@ class InstitutionTestCase(TestCase):
     saved_institutions = Institution.objects.all()
     self.assertTrue(len(saved_institutions)==0)
     
+class LearnerTestCase(TestCase):
+  # Set up method
+  def setUp(self):
+    self.learner = Learner(learner_reg_no = 'smp/1234/2021', learner_first_name='kelvin', learner_second_name='Kevson', learner_last_name='Kimani', course_taken='Full Stack Development', date_enrolled='2021-07-12', date_completed='2021-12-12',grade_attained='Distinction', certificate_image='my-certificate')
     
-    # institution_reg_no = models.CharField(max_length=30)
-    # institution_name = models.CharField(max_length=40)
-    # location_name = models.CharField(max_length=20)
-    # location_address = models.CharField(max_length=20)
-    # # institution_email 
+  # Test Instance
+  def test_instance(self):
+    self.assertTrue(isinstance(self.learner, Learner))
+    
+  # Test save learner
+  def test_save_learner(self):
+    self.learner.save_learner()
+    saved_learners = Learner.objects.all()
+    self.assertTrue(len(saved_learners)==1)
+    
+    # learner_reg_no = models.CharField(max_length=30)
+    # learner_first_name = models.CharField(max_length=10)
+    # learner_second_name = models.CharField(max_length=10, blank=True)
+    # learner_last_name = models.CharField(max_length=10)
+    # course_taken = models.CharField(max_length=30)
+    # date_enrolled = models.DateTimeField()
+    # date_completed = models.DateTimeField()
+    # grade_attained = models.CharField(max_length=20)
+    # certificate_image = CloudinaryField('image')
+    # institution

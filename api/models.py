@@ -56,6 +56,12 @@ class Learner(models.Model):
     certificate_image = CloudinaryField('image')
     institution = models.ManyToManyField(Institution)
     
+    def save_learner(self):
+        self.save()
+    
+    def delete_learner(self):
+        self.delete()
+        
     def __str__(self):
         return self.learner_first_name
     
