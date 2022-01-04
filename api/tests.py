@@ -11,6 +11,11 @@ class InstitutionTestCase(TestCase):
   def test_instance(self):
     self.assertTrue(isinstance(self.institution, Institution))
     
+  # Test save institution
+  def test_save_institution(self):
+    self.institution.save_institution()
+    saved_institutions = Institution.objects.all()
+    self.assertTrue(len(saved_institutions)==1)
     
     
     

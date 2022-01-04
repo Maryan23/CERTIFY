@@ -35,6 +35,9 @@ class Institution(models.Model):
     location_address = models.CharField(max_length=20)
     institution_email = models.EmailField()
     
+    def save_institution(self):
+        self.save()
+    
     def __str__(self):
         return self.institution_name
     
