@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'certify';
+  user = {
+    name: 'John',
+    age: 36,
+    id: 1
+  };
 }
