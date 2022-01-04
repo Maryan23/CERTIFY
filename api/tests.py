@@ -17,6 +17,12 @@ class InstitutionTestCase(TestCase):
     saved_institutions = Institution.objects.all()
     self.assertTrue(len(saved_institutions)==1)
     
+  # Test delete institution
+  def test_delete_institution(self):
+    self.institution.save_institution()
+    self.institution.delete_institution()
+    saved_institutions = Institution.objects.all()
+    self.assertTrue(len(saved_institutions)==0)
     
     
     # institution_reg_no = models.CharField(max_length=30)

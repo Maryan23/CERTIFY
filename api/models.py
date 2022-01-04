@@ -38,6 +38,9 @@ class Institution(models.Model):
     def save_institution(self):
         self.save()
     
+    def delete_institution(self):
+        self.delete()
+    
     def __str__(self):
         return self.institution_name
     
