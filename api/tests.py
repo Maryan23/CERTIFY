@@ -39,6 +39,12 @@ class LearnerTestCase(TestCase):
     saved_learners = Learner.objects.all()
     self.assertTrue(len(saved_learners)==1)
     
+  def test_delete_learner(self):
+    self.learner.save_learner()
+    self.learner.delete_learner()
+    saved_learners = Learner.objects.all()
+    self.assertTrue(len(saved_learners)==0)
+    
     # learner_reg_no = models.CharField(max_length=30)
     # learner_first_name = models.CharField(max_length=10)
     # learner_second_name = models.CharField(max_length=10, blank=True)
