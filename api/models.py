@@ -1,18 +1,19 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 from django.db import models
 
-# Create your models here.
-class User(AbstractUser):
-    is_employer = models.BooleanField(default=False)
 
 class Employer(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    company_name = models.CharField(max_length=50,null=True,blank = True)
-    prof_photo = CloudinaryField('image')
-    about = models.TextField(max_length=1000, blank=True, null=True)
-    contact = models.CharField(max_length=50, blank=True, null=True)
+    company_logo = CloudinaryField('image')
+    company_name = models.CharField(max_length=50)
+    about = models.TextField(max_length=1000, blank=True)
+    company_tel_number = models.IntegerField()
+    company_email = models.EmailField()
+    company_reg_number = models.CharField(max_length=20)
+    joined_on = models.DateTimeField(auto_now_add=True,null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE,null=True)
+
 
     def __str__(self):
         return self.company_name
