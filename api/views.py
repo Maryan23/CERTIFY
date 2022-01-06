@@ -8,8 +8,10 @@ from rest_framework.views import APIView
 
 from .models import Institution, Learner
 from .serializer import InstitutionSerializer, LearnerSerializer
+from .decorators import allowed_users
 
 # Create your views here.
+@allowed_users(allowed_roles=[])
 class InstitutionList(APIView):
   def get(self, request, format=None):
     all_institutions = Institution.objects.all()
