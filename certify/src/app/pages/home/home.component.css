@@ -1,0 +1,23 @@
+.home-par{
+ position: absolute;
+width: 900px;
+height: 350px;
+left: 500px;
+top: 390px;
+
+font-family: tahoma;
+font-style: normal;
+font-weight: normal;
+font-size: 20px;
+align-items: left;
+
+color: #000000;
+}
+.cert{
+  color:orange
+
+}
+img{
+  height: 100vh;
+  width:100vw;
+}
