@@ -8,12 +8,18 @@ import { EmployerComponent } from './pages/employer/employer.component';
 import { UserService } from './services/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { HomeComponent } from './pages/home/home.component';
+import { AboutComponent } from './pages/about/about.component';
+import { FooterComponent } from './pages/footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserpageComponent,
-    EmployerComponent
+    EmployerComponent,
+    HomeComponent,
+    AboutComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
