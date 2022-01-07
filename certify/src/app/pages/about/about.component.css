@@ -1,0 +1,21 @@
+img{
+left: 5px;
+top: 5px;
+}
+.vr{
+  height: 300px;
+  border: 1px solid #000000;
+}
+.well {
+  display: flex;
+  align-items: center;
+}
+.abt-us{
+  color:orange;
+  font-family:tahoma,arial;
+  font-size:20px
+}
+.abt-par{
+  align-items: center;
+  padding: 40px 25px 40px 25px;
+}
