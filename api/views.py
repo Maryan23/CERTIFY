@@ -47,7 +47,7 @@ def LearnerAPI(request, id=0):
     learner_data = JSONParser().parse(request)
     learner_serializer = LearnerSerializer(data=learner_data)
     
-    # 37 min https://www.youtube.com/watch?v=1Hc7KlLiU9w
+    # 37 min https://www.youtube.com/watch?v=1Hc7KlLiU9w (comment)
     
     if learner_serializer.is_valid():
       learner_serializer.save()
