@@ -11,3 +11,4 @@ class LearnerSerializer(serializers.ModelSerializer):
 from .models import Employer
 
 class EmployerSerializer(serializers.ModelSerializer):
+    class Meta:
