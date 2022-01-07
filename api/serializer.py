@@ -5,3 +5,4 @@ class InstitutionSerializer(serializers.ModelSerializer):
     model = Institution
     fields = ('institution_reg_no', 'institution_name', 'location_name', 'location_address', 'institution_email')
 class LearnerSerializer(serializers.ModelSerializer):
+  class Meta:
