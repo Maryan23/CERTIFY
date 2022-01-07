@@ -5,7 +5,12 @@ from django.db import models
 
 # Create your models here.
 
+class User(AbstractUser):
+    is_institution = models.BooleanField(default=False)
+    
+
 class Institution(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     institution_reg_no = models.CharField(max_length=30)
     institution_name = models.CharField(max_length=40)
     location_name = models.CharField(max_length=20)

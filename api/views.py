@@ -83,6 +83,9 @@ def LearnerAPI(request, id=0):
   elif request.method=='POST':
     learner_data = JSONParser().parse(request)
     learner_serializer = LearnerSerializer(data=learner_data)
+    
+    # 37 min https://www.youtube.com/watch?v=1Hc7KlLiU9w
+    
     if learner_serializer.is_valid():
       learner_serializer.save()
       return JsonResponse("The add was successfully created", safe=False)
@@ -92,9 +95,6 @@ def LearnerAPI(request, id=0):
     learner_data = JSONParser().parse(request)
     learner = Learner.objects.get(learner_reg_no = learner_data['learner_reg_no'])
     learner_serializer=LearnerSerializer(learner, data = learner_data)
-    
-    # 37 min https://www.youtube.com/watch?v=1Hc7KlLiU9w
-    
     if learner_serializer.is_valid():
       learner_serializer.save()
       return JsonResponse("Learner data updated successfully", safe=False)
