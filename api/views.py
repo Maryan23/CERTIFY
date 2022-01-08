@@ -24,7 +24,7 @@ class UserViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
 @csrf_exempt
-@login_required(login_url='/account/login/')
+@login_required
 def institutionAPI(request, id=0):
   authentication_classes = (TokenAuthentication,)
   permission_classes = [IsAuthenticated]
@@ -56,7 +56,7 @@ def institutionAPI(request, id=0):
     return JsonResponse("Institution deleted successfully", safe=False)
   
 @csrf_exempt
-@login_required(login_url='/account/login/')
+@login_required
 def LearnerAPI(request, id=0):
   if request.method == 'GET':
     learners = Learner.objects.all()
