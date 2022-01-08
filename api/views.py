@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 from rest_framework import viewsets, permissions
 from django.contrib.auth import get_user_model
 
@@ -17,10 +19,13 @@ class UserViewSet(viewsets.ModelViewSet):
     # queryset = User.objects.all().order_by('-date_joined')
     queryset = get_user_model().objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = [IsAuthenticated]
 
 @csrf_exempt
 def institutionAPI(request, id=0):
+  authentication_classes = (TokenAuthentication,)
+  permission_classes = [IsAuthenticated]
   if request.method == 'GET':
     institutions = Institution.objects.all()
     institutions_serializer = InstitutionSerializer(institutions, many = True)
