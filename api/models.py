@@ -2,6 +2,10 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from cloudinary.models import CloudinaryField
 from django.db import models
+from django.db.models.deletion import CASCADE
+# from django.contrib.auth import get_user_model
+
+# User = get_user_model()
 
 # Create your models here.
 
@@ -36,7 +40,7 @@ class Learner(models.Model):
     date_completed = models.DateTimeField()
     grade_attained = models.CharField(max_length=20)
     certificate_image = CloudinaryField('image')
-    institution = models.ManyToManyField(Institution)
+    institution = models.ForeignKey(Institution, on_delete=CASCADE)
     
     def save_learner(self):
         self.save()
