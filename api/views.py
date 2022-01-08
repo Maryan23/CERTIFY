@@ -6,6 +6,7 @@ from rest_framework.parsers import JSONParser
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import viewsets, permissions
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 
 from .models import Institution, Learner
@@ -23,6 +24,7 @@ class UserViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
 @csrf_exempt
+@login_required(login_url='/account/login/')
 def institutionAPI(request, id=0):
   authentication_classes = (TokenAuthentication,)
   permission_classes = [IsAuthenticated]
@@ -54,6 +56,7 @@ def institutionAPI(request, id=0):
     return JsonResponse("Institution deleted successfully", safe=False)
   
 @csrf_exempt
+@login_required(login_url='/account/login/')
 def LearnerAPI(request, id=0):
   if request.method == 'GET':
     learners = Learner.objects.all()
