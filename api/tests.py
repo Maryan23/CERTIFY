@@ -1,7 +1,38 @@
 from django.test import TestCase
-from .models import Institution, Learner
+from .models import Institution, Learner ,Employer
+from django.contrib.auth.models import User
+
 
 # Create your tests here.
+class EmployerTestClass(TestCase):
+    #Set Up method
+    def setUp(self):
+        self.teloperators = Employer(company_logo = 'image.png',company_name='Teloperators',about = 'We love phones',company_tel_number = '0712345678',company_email='teloperators@test.com',company_reg_number='B2345')
+
+    # Testing  instance
+    def test_instance(self):
+        self.assertTrue(isinstance(self.teloperators,Employer))
+
+    # Testing Save Method
+    def test_save_method(self):
+        self.teloperators.save_employer()
+        employers = Employer.objects.all()
+        self.assertTrue(len(employers) > 0)
+
+    def tearDown(self):
+        Employer.objects.all().delete()
+
+    # Testing Update Method
+    def test_update_method(self):
+        self.teloperators.update_employer()
+        employers = Employer.objects.all()
+        self.assertTrue(len(employers) > 0)
+
+    def test_search_by_company_name(self):
+        user = 1
+        employer = Employer.search_by_company_name(user)
+        self.assertFalse(len(employer)>0)
+        
 class InstitutionTestCase(TestCase):
   # Set up method
   def setUp(self):
@@ -50,11 +81,3 @@ class LearnerTestCase(TestCase):
     self.learner.delete_learner()
     saved_learners = Learner.objects.all()
     self.assertTrue(len(saved_learners)==0)
-    
-  # def test_view_learners_by_institution(self):
-  #   self.learner.save_learner()
-  #   self.learner2 = Learner(learner_reg_no = 'smp/12345/2021', learner_first_name='Martin', learner_second_name='Okelo', learner_last_name='Otieno', course_taken='Full Stack Development', date_enrolled='2021-07-12', date_completed='2021-12-12',grade_attained='Distinction', certificate_image='my-certificate2', institution = self.institution)
-  #   self.learner2.save_learner()
-  #   saved_learners = Learner.view_learners_by_institution()
-  #   self.assertTrue(len(saved_learners)==2)
-    
