@@ -6,7 +6,7 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from .models import Employer
 from .serializers import EmployerSerializer
-from django.contrib.auth import get_user_model, login
+from django.contrib.auth import get_user_model
 from rest_framework.parsers import JSONParser
 from django.contrib.auth.decorators import login_required
 
@@ -36,7 +36,7 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
-    queryset = User.objects.all().order_by('-date_joined')
+    queryset = get_user_model().objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
