@@ -1,16 +1,18 @@
-from django.contrib import admin
 from django.urls import path,include
 from rest_framework import routers
-from Certify.api import views
+from . import views
+from rest_framework.authtoken.views import ObtainAuthToken
+
 
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
+urlpatterns=[
     path('', include(router.urls)),
+    path('api/employers/',views.EmployerList.as_view()),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('auth/',ObtainAuthToken.as_view())
 
 
 ]
