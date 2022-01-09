@@ -1,24 +1,36 @@
+from django.http.response import JsonResponse
 from .serializers import UserSerializer
-from rest_framework.response import Response
-from rest_framework.views import APIView
 from django.contrib.auth.models import User
 from rest_framework import viewsets
-from rest_framework import permissions
-from .permissions import  IsAdminOrReadOnly
 from rest_framework.authentication import TokenAuthentication
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import IsAuthenticated
+from .models import Employer
+from .serializers import EmployerSerializer
+from django.contrib.auth import get_user_model, login
+from rest_framework.parsers import JSONParser
+from django.contrib.auth.decorators import login_required
 
 
-# from .models import Employer
-# from .serializers import EmployerSerializer
 
-# Create your views here.
-# class EmployerList(APIView):
-#     permission_classes = (IsAdminOrReadOnly,)
-#     def get(self,request,format=None):
-#         employers = Employer.objects.all()
-#         serializer = EmployerSerializer(employers,many=True)
-#         return Response(serializer.data)
+
+#Create your views here.
+@login_required
+def EmployerList(request,id=0):
+    authentication_classes = (TokenAuthentication)
+    permission_classes = [IsAuthenticated]
+    if request.method == 'GET':
+        employers = Employer.objects.all()
+        employer_serializer = EmployerSerializer(employers,many=True)
+        return JsonResponse(employer_serializer.data , safe = True)
+
+    elif request.method == 'POST':
+        employer_data = JSONParser().parse(request)
+        employer_serializer = EmployerSerializer(data=employer_data)
+        if employer_serializer.is_valid():
+            employer_serializer.save()
+            return JsonResponse('Employer added successfully!')
+
+        return JsonResponse('Employer failed to add!')
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -27,4 +39,4 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
     authentication_classes = (TokenAuthentication,)
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAuthenticated,)
