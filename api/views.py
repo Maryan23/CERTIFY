@@ -21,7 +21,7 @@ def EmployerList(request,id=0):
     if request.method == 'GET':
         employers = Employer.objects.all()
         employer_serializer = EmployerSerializer(employers,many=True)
-        return JsonResponse(employer_serializer.data , safe = True)
+        return JsonResponse(employer_serializer.data , safe = False)
 
     elif request.method == 'POST':
         employer_data = JSONParser().parse(request)
