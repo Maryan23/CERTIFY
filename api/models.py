@@ -1,26 +1,17 @@
 from django.db import models
-# from django.contrib.auth.models import AbstractUser
-from cloudinary.models import CloudinaryField
-from django.db import models
-
-# # Create your models here.
-# class User(AbstractUser):
-#     is_employer = models.BooleanField(default=False)
-
-# class Employer(models.Model):
-#     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-#     company_name = models.CharField(max_length=50,null=True,blank = True)
-#     prof_photo = CloudinaryField('image')
-#     about = models.TextField(max_length=1000, blank=True, null=True)
-#     contact = models.CharField(max_length=50, blank=True, null=True)
-
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 from cloudinary.models import CloudinaryField
 from django.db import models
 
 # Create your models here.
+class User(AbstractUser):
+    is_employer = models.BooleanField(default=False)
+    is_institution = models.BooleanField(default=False)
+    is_learner = models.BooleanField(default = False)
+
 
 class Institution(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     institution_reg_no = models.CharField(max_length=30)
     institution_name = models.CharField(max_length=40)
     location_name = models.CharField(max_length=20)
@@ -28,6 +19,13 @@ class Institution(models.Model):
     institution_email = models.EmailField()
     
     def save_institution(self):
+        self.save()
+    
+    def delete_institution(self):
+        self.delete()
+    
+    def __str__(self):
+        return self.institution_name
 
 class Employer(models.Model):
     company_logo = CloudinaryField('image')
@@ -40,22 +38,16 @@ class Employer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE,null=True)
 
 
-class Institution(models.Model):
-    institution_reg_no = models.CharField(max_length=30)
-    institution_name = models.CharField(max_length=40)
-    location_name = models.CharField(max_length=20)
-    location_address = models.CharField(max_length=20)
-    institution_email = models.EmailField()
-
-=======
     def save_employer(self):
         self.save()
     
-    def delete_institution(self):
-        self.delete()
-    
-    def __str__(self):
-        return self.institution_name
+    def update_employer(self):
+        self.save()
+
+    @classmethod
+    def search_by_company_name(cls,search_term):
+        employer = cls.objects.filter(project_name__icontains=search_term)
+        return employer
     
 class Learner(models.Model):
     learner_reg_no = models.CharField(max_length=30)
@@ -77,11 +69,6 @@ class Learner(models.Model):
     def delete_learner(self):
         self.delete()
     
-    # @classmethod    
-    # def view_learners_by_institution(cls, institution_search):
-    #     learners_by_institution = cls.objects.filter(institution_search)
-    #     return learners_by_institution
-        
     def __str__(self):
         return self.learner_first_name
     
