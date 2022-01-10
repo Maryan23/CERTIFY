@@ -1,9 +1,8 @@
 from django.test import TestCase
-from .models import Institution, Learner ,Employer
+from .models import Employer,Institution,Learner
 from django.contrib.auth.models import User
 
 
-# Create your tests here.
 class EmployerTestClass(TestCase):
     #Set Up method
     def setUp(self):
@@ -32,7 +31,7 @@ class EmployerTestClass(TestCase):
         user = 1
         employer = Employer.search_by_company_name(user)
         self.assertFalse(len(employer)>0)
-        
+
 class InstitutionTestCase(TestCase):
   # Set up method
   def setUp(self):

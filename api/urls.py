@@ -7,6 +7,7 @@ from rest_framework.authtoken.views import ObtainAuthToken
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
 
+
 urlpatterns=[
     path('', include(router.urls)),
     path('api/employers/',views.EmployerList),

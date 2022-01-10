@@ -1,16 +1,46 @@
 from django.http.response import JsonResponse
-from django.shortcuts import render
+from .serializers import UserSerializer
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework.parsers import JSONParser
+from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
-from rest_framework import viewsets
-from django.contrib.auth.decorators import login_required
+from .models import Employer,Institution,Learner
+from .serializers import EmployerSerializer,InstitutionSerializer,LearnerSerializer
 from django.contrib.auth import get_user_model
-from .models import Institution, Learner , Employer
-from .serializers import InstitutionSerializer, LearnerSerializer, UserSerializer, EmployerSerializer
+from rest_framework.parsers import JSONParser
+from django.contrib.auth.decorators import login_required
 
-# Create your views here
+
+
+
+#Create your views here.
+@login_required
+def EmployerList(request,id=0):
+    authentication_classes = (TokenAuthentication)
+    permission_classes = [IsAuthenticated]
+    if request.method == 'GET':
+        employers = Employer.objects.all()
+        employer_serializer = EmployerSerializer(employers,many=True)
+        return JsonResponse(employer_serializer.data , safe = False)
+
+    elif request.method == 'POST':
+        employer_data = JSONParser().parse(request)
+        employer_serializer = EmployerSerializer(data=employer_data)
+        if employer_serializer.is_valid():
+            employer_serializer.save()
+            return JsonResponse('Employer added successfully!')
+
+        return JsonResponse('Employer failed to add!')
+
+class UserViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = get_user_model().objects.all().order_by('-date_joined')
+    serializer_class = UserSerializer
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
+
 @csrf_exempt
 @login_required
 def institutionAPI(request, id=0):
@@ -55,7 +85,6 @@ def LearnerAPI(request, id=0):
     learner_data = JSONParser().parse(request)
     learner_serializer = LearnerSerializer(data=learner_data)
     
-    # 37 min https://www.youtube.com/watch?v=1Hc7KlLiU9w
     
     if learner_serializer.is_valid():
       learner_serializer.save()
@@ -75,31 +104,3 @@ def LearnerAPI(request, id=0):
     learner=Learner.objects.get(id=id)
     learner.delete()
     return JsonResponse("Learner deleted successfully", safe=False)
-
-@login_required
-def EmployerList(request,id=0):
-    authentication_classes = (TokenAuthentication)
-    permission_classes = [IsAuthenticated]
-    if request.method == 'GET':
-        employers = Employer.objects.all()
-        employer_serializer = EmployerSerializer(employers,many=True)
-        return JsonResponse(employer_serializer.data , safe = False)
-
-    elif request.method == 'POST':
-        employer_data = JSONParser().parse(request)
-        employer_serializer = EmployerSerializer(data=employer_data)
-        if employer_serializer.is_valid():
-            employer_serializer.save()
-            return JsonResponse('Employer added successfully!')
-
-        return JsonResponse('Employer failed to add!')
-
-class UserViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
-    queryset = get_user_model().objects.all().order_by('-date_joined')
-    serializer_class = UserSerializer
-    authentication_classes = (TokenAuthentication,)
-    permission_classes = (IsAuthenticated,)
-
