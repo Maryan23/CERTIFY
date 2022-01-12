@@ -50,6 +50,7 @@ class Employer(models.Model):
         return employer
     
 class Learner(models.Model):
+    learner_image = CloudinaryField('learner_image')
     learner_reg_no = models.CharField(max_length=30)
     learner_first_name = models.CharField(max_length=10)
     learner_second_name = models.CharField(max_length=10, blank=True)
