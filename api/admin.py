@@ -1,10 +1,9 @@
 from django.contrib import admin
-from .models import Institution, Learner
+from .models import Certificate, Institution, Learner,Employer,User
 
 # Register your models here.
+admin.site.register(User)
 admin.site.register(Institution)
 admin.site.register(Learner)
-from api.models import Employer
-
-# Register your models here.
 admin.site.register(Employer)
+admin.site.register(Certificate)
