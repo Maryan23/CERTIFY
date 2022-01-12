@@ -15,11 +15,11 @@ from django.contrib.auth.decorators import login_required
 
 #Create your views here.
 @login_required
-def EmployerList(request,id=0):
+def EmployerList(request,id):
     authentication_classes = (TokenAuthentication)
     permission_classes = [IsAuthenticated]
     if request.method == 'GET':
-        employers = Employer.objects.all()
+        employers = Employer.objects.all(id=id)
         employer_serializer = EmployerSerializer(employers,many=True)
         return JsonResponse(employer_serializer.data , safe = False)
 
