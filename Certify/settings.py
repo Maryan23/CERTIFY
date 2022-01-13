@@ -112,9 +112,10 @@ DATABASES = {
 # Cloudinary
 #Configuring cloudinary
 cloudinary.config(
-    cloud_name =config('CLOUD_NAME'),
-    api_key= config('CLOUD_API_KEY'),
-    api_secret=config('API_SECRET'),
+    cloud_name = config('CD_NAME'),
+    api_key= config('CD_API'),
+    api_secret=config('CD_SECRET'),
+    secure = config('CD_SECURE')
 )
 
 
