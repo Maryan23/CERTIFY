@@ -1,4 +1,4 @@
-from django.urls import path,include
+from django.urls import path
 from django.conf.urls import url
 from . import views
 
@@ -6,4 +6,17 @@ from . import views
 urlpatterns=[
     path('' ,views.index ,name='index'),
     url(r'^about/$', views.about, name='about'),
+    path('signup/',views.SignUp,name = 'Signup'),
+    path('accounts/signup/employer/',views.EmployerSignUpView.as_view(), name = 'employer_signup'),
+    path('accounts/signup/institution/',views.InstitutionSignUpView.as_view(), name = 'institution_signup'),
+    path('login/',views.login_view, name = 'login_view'),
+    path('logout/',views.logout, name = 'logout'),
+    path('institution/' ,views.institution ,name='institution'),
+    path('create_learner/',views.create_learner,name = 'create_learner'),
+    path('employer/<int:id>/', views.employer, name='employer'),
+    path('search',views.search, name='search'),
+    path('institution' ,views.institution ,name='institution'),
+    path('learner/<int:learner_id>/',views.learner,name='learner'),
+    path('update_learner/<learner_id>',views.update_learner,name='update_learner'),
+    path('delete_learner/<learner_id>',views.delete_learner,name='delete_learner'),
 ]

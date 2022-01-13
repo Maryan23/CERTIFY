@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from cloudinary.models import CloudinaryField
 from django.db import models
 from django.db.models.deletion import CASCADE
-from django.db.models.lookups import In
+from django.db.models.lookups import In                  
 
 # Create your models here.
 class User(AbstractUser):
@@ -15,8 +15,8 @@ class User(AbstractUser):
 class Employer(models.Model):
     logo = CloudinaryField('logo')
     company_name = models.CharField(max_length=50)
-    about = models.TextField(max_length=1000, blank=True)
-    tel_number = models.IntegerField()
+    about = models.TextField(max_length=1000)
+    tel_number = models.IntegerField(null=True)
     email = models.EmailField()
     reg_number = models.CharField(max_length=20)
     joined_on = models.DateTimeField(auto_now_add=True,null=True)
@@ -29,7 +29,7 @@ class Employer(models.Model):
         self.save()
     
     def __str__(self):
-        return self.company_name
+        return self.user.username
 
 
 class Institution(models.Model):
@@ -52,12 +52,17 @@ class Institution(models.Model):
         return found_institution
     
     def __str__(self):
-        return self.institution_name
+        return self.user.username
     
     @classmethod
     def get_institution_by_name(cls, search_term):
         institution = cls.objects.filter(name__icontains=search_term)
         return institution
+
+    @classmethod
+    def filter_by_reg_no(cls, reg_no):
+        found_institution = cls.objects.filter(reg_no = reg_no)
+        return found_institution
 
 class Certificate(models.Model):
     cert_name = models.CharField(max_length=30,null=True)
@@ -95,3 +100,7 @@ class Learner(models.Model):
     def delete_learner(self):
         self.delete()   
     
+    @classmethod
+    def search_by_learner_name(cls, search_term):
+        learner = cls.objects.filter(first_name__icontains=search_term)
+        return learner

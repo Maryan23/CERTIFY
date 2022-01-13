@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="container-fluiid searchlearner" style="min-height: 80vh;">
+    <div class="container">
+        <div class="text-center">
+            {% if learners %}
+              <h2 class="text-center">Found {{ learners|length }} of searched name {{message}}</h2>
+            {% else %}
+              <h4 class="text-center">Found 0 learners for the search name {{message}}</h4>
+            {% endif %}
+          
+        </div>
+        <div class="row">
+            {% for learner in learners %}
+            <div class="col-md-5 search">
+                <br>
+                <div class="">
+                    <div>
+                        <h4 class="text-left ml-5">{{ learner.first_name}} {{ learner.second_name}} {{ learner.last_name}}</h4>
+                        <img src="{{learner.learner_image.url}}" class="rounded-circle" alt="img" width="320" height="320">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7">
+                {% if certificates %}
+                {% for certificate in certificates %}
+                <div class="row">
+                    <p>{{ certificate.cert_name }}</p>
+                    <img src="{{ certificate.cert_image.url }}" class="" alt="certificate" width="">
+                    <p><strong>{{ certificate.istitution}}</strong></p>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

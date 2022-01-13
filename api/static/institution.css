@@ -1,0 +1,23 @@
+.container {
+    margin-top: 2cm;
+}
+#info {
+    background-color: #8BAEB0;
+    height: 25cm;
+}
+.name {
+    background-color: #8BAEB0;
+}
+.certificate {
+    background-color: #8BAEB0;
+}
+button {
+    border-radius: 10%;
+}
+#create {
+    margin: 0.3cm;
+    margin-left: 3cm;
+}
+#view {
+    margin: 0.3cm;
+}

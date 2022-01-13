@@ -1,0 +1,10 @@
+.search {
+    margin: auto;
+}
+
+.social {
+    display: flex;
+    margin: auto;
+    justify-content: space-around;
+    width: 20%;
+ }

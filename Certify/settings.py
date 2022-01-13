@@ -15,7 +15,8 @@ from decouple import config
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
-import os
+from decouple import os
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -106,7 +107,7 @@ DATABASES = {
         'NAME': config('DB_NAME'),
         'USER': config('DB_USER'),
         'PASSWORD':config('DB_PASSWORD'),
-        'HOST':config('DB_HOST'),
+        'HOST':config('DB_HOST')
     }
 }
 
