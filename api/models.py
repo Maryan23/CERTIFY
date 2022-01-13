@@ -49,11 +49,15 @@ class Institution(models.Model):
     
     def __str__(self):
         return self.institution_name
-    
     @classmethod
     def get_institution_by_name(cls, search_term):
         institution = cls.objects.filter(name__icontains=search_term)
         return institution
+
+    @classmethod
+    def filter_by_reg_no(cls, reg_no):
+        found_institution = cls.objects.filter(reg_no = reg_no)
+        return found_institution
 
 class Certificate(models.Model):
     cert_name = models.CharField(max_length=30,null=True)

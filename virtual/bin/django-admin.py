@@ -1,4 +1,4 @@
-#!/home/kevson/Desktop/Core/Django/Group Project/CERTIFY/virtual/bin/python
+#!/home/moringa/Desktop/CERTIFY/virtual/bin/python
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 
