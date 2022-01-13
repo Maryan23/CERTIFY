@@ -1,5 +1,5 @@
 #!/bin/sh
-'''exec' "/home/kevson/Desktop/Core/Django/Group Project/CERTIFY/virtual/bin/python" "$0" "$@"
+'''exec' "/home/kevson/Desktop/Core/Django/Group Project/New group/CERTIFY/virtual/bin/python" "$0" "$@"
 ' '''
 # -*- coding: utf-8 -*-
 import re

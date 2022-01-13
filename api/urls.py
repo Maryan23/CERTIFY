@@ -4,6 +4,6 @@ from . import views
 
 
 urlpatterns=[
-    path('' ,views.index ,name='index')
-
+    path('' ,views.index ,name='index'),
+    url(r'^about/$', views.about, name='about'),
 ]
