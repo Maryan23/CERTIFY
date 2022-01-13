@@ -109,7 +109,7 @@ DATABASES = {
     }
 }
 
-# Cloudinary
+#Cloudinary
 #Configuring cloudinary
 cloudinary.config(
     cloud_name = config('CD_NAME'),

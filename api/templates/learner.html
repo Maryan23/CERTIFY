@@ -1,0 +1,35 @@
+{% extends "base.html" %} {% load bootstrap4 %} {% load static %}{% block content %}
+<!-- Sidebar/menu -->
+</nav>
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:250px;">
+    <!-- Header -->
+    <header id="portfolio">
+
+    </header>
+    <!-- First Photo Grid-->
+
+    <div class="w3-row-padding">
+        <div class="w3-container w3-col l6 w3-margin-bottom ">
+            <img src="{{Certificate.Certificate_photo.url}}" alt="certificate_photo" style="width:100%" class="w3-card-4">
+        </div>
+        <div class="w3-container w3-col l6 w3-padding w3-margin-bottom">
+            <h5 class="w3-center">Certificate Details</h5>
+            {% for learner in learner %}
+            <p>Reg_no: {{learner.reg_no}}</p>
+            <p>First_name: {{learner.first_name}}</p>
+            <p>Second_name: {{learner.second_name}}</p>
+            <p>Last_name: {{learner.last_name}}</p>
+            <p>Course_taken: {{learner.course_taken}}</p>
+            <p>Date_enrolled: {{learner.date_enrolled}}</p>
+            <p>Date_completed: {{learner.date_completed}}</p>
+            <p>Grade_attained: {{learner.grade_attained}}</p>
+            {%endfor%}
+            <br>
+            <a href="{{learner.url}}">
+                <br>
+        </div>
+
+        {% endblock %}

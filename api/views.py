@@ -1,3 +1,6 @@
+from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib import auth
 from django.shortcuts import render,redirect
@@ -5,11 +8,18 @@ from .forms import EmployerSignUpForm,InstitutionSignUpForm,LoginForm,LearnerFor
 from api.models import *
 from django.contrib.auth import authenticate, login
 from django.views.generic import CreateView
-from django.contrib.auth.decorators import login_required
 
 #Create your views
 def index(request):
   return render(request,'index.html' )
+
+@login_required(login_url='/accounts/login')
+def learner(request, learner_id):
+    try:
+        learner = Learner.filter_by_id(id=learner_id)
+    except Learner.DoesNotExist:
+        raise Http404()
+    return render(request, "learner.html",{"learner":learner} )
 
 def SignUp(request):
     return render(request,'register.html')
