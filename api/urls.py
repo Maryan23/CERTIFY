@@ -1,11 +1,15 @@
 from django.urls import path
 from django.conf.urls import url
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 
 urlpatterns=[
     path('' ,views.index ,name='index'),
     url(r'^about/$', views.about, name='about'),
+    path('learner/<learner_id>',views.learner,name ='learner'),
     path('signup/',views.SignUp,name = 'Signup'),
     path('accounts/signup/employer/',views.EmployerSignUpView.as_view(), name = 'employer_signup'),
     path('accounts/signup/institution/',views.InstitutionSignUpView.as_view(), name = 'institution_signup'),
@@ -20,3 +24,6 @@ urlpatterns=[
     path('update_learner/<learner_id>',views.update_learner,name='update_learner'),
     path('delete_learner/<learner_id>',views.delete_learner,name='delete_learner'),
 ]
+
+if settings.DEBUG:
+    urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
