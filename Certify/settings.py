@@ -102,19 +102,21 @@ WSGI_APPLICATION = 'Certify.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': ('wifi'),
-        'USER': ('khalyz'),
-        'PASSWORD':('joefes'),
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD':config('DB_PASSWORD'),
+        'HOST':config('DB_HOST')
     }
 }
 
 # Cloudinary
 #Configuring cloudinary
 cloudinary.config(
-    cloud_name = ('dattmqmzd'),
-    api_key= ('174211532968223'),
-    api_secret=('tElrLM-9H9WUbxA-0FpraDeDLwk'),
-    
+    cloud_name = config('CD_NAME'),
+    api_key= config('CD_API'),
+    api_secret=config('CD_SECRET'),
+    secure = config('CD_SECURE')
+
 )
 
 
