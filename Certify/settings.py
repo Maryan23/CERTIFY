@@ -15,7 +15,7 @@ from decouple import config
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
-
+from decouple import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     'cloudinary',
     'rest_framework.authtoken',
     'corsheaders',
-    'bootstrap4',
+    'bootstrap4'
     ]
 
 MIDDLEWARE = [
@@ -105,6 +105,7 @@ DATABASES = {
         'NAME': config('DB_NAME'),
         'USER': config('DB_USER'),
         'PASSWORD':config('DB_PASSWORD'),
+        'HOST':config('DB_HOST')
     }
 }
 
@@ -163,7 +164,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
