@@ -1,6 +1,42 @@
-{% extends 'base.html' %}
-{% block content %}
-<h1 align="center">WELCOME TO CERTIFY</h1>
-<button style="margin-left: 42%;" class="btn btn-sm btn-danger mt-4"><a style="color: white;" href="{% url 'create_learner'%}">Click to Sign Up as an Institution or Employer</a></button>
-
-{% endblock %}
+{% load bootstrap4 %}
+{% load static%}
+<div class="container">
+    <div class="row">
+        <div class="col-3" style="background-color: #8BAEB0;">
+            <div id="info">
+                <h1>Institution Info</h1>
+                <h3>Institution Name: {{institution.institution_name}}</h3>
+                <h3>Institution No: {{institution.reg_no}}</h3>
+                <h3>Institution Location: {{institution.location}}</h3>
+            </div>
+        </div>
+        <div class="col-9" id="graduate">
+            <ul>
+                <li *ngFor='let graduate of graduates'>
+                    <div class="row">
+                        <div class="col-1">
+                            <img src="https://cdn2.vectorstock.com/i/1000x1000/20/76/man-avatar-profile-vector-21372076.jpg" height="45px" width="45px" alt="">
+                        </div>
+                        <div class="col-6">
+                            <div class="name">
+                                <h3>{{learner.firstname}} {{learner.lastname}}</h3>
+                            </div>
+                            <div class="certificate">
+                                <h3>{{learner.certificate}}</h3>
+                            </div>
+                            <div class="row">
+                                <div>
+                                    <button type="button" id="view" class="btn btn-info">View</button>
+                                    <button type="button" id="delete" class="btn btn-danger">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div id="create">
+                <button type="button" id="create" class="btn btn-success">Create Learner</button>
+            </div>
+        </div>
+    </div>
+</div>

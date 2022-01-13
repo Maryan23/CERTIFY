@@ -55,6 +55,11 @@ class Institution(models.Model):
         institution = cls.objects.filter(name__icontains=search_term)
         return institution
 
+    @classmethod
+    def filter_by_reg_no(cls, reg_no):
+        found_institution = cls.objects.filter(reg_no = reg_no)
+        return found_institution
+
 class Certificate(models.Model):
     cert_name = models.CharField(max_length=30,null=True)
     cert_image = CloudinaryField('cert_image')
