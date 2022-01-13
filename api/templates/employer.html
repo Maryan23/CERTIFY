@@ -1,0 +1,43 @@
+{%extends 'base.html'%}
+{% load bootstrap4 %}
+{% block content %}
+
+<div class="container-fluid employer" style="min-height: 80vh; background-color:grey;">
+    <div class="container">
+        <br>
+        <div class="row search" style="float: right;">
+            <form class="form-inline my-2 my-lg-0" role="search" action="{% url 'search' %}">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search learner" name="first_name" aria-label="Search">
+                <button class="btn btn-outline-dark my-2 my-sm-0 mr-5" type="submit">Search</button>
+            </form>
+        </div>
+        <br/><br/><br/><br/>
+        <div class="row">
+            <div class="col-md-6 mb-5 welcome">
+                <img src="{{employer.logo.url}}" style="height: 400px; width:400px; border-radius:10px" class="">
+            </div>
+            <br>
+            <div class="col-md-6 brief">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="text-center">{{employer.company_name}}</h2>
+                    </div>
+                    <div class="card-body">
+                        <p>{{employer.about}}</p>
+                    </div>
+                    <div class="card-footer">
+                        <p class="mb-0"><strong>Email: </strong>{{employer.email}}</p>
+                        <p class="mt-0"><strong>Tel: </strong>{{employer.tel_number}}</p>
+                        <br>
+                        <p><span style="float:left">Joined on <strong>{{employer.joined_on | date}}</strong</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+</div>
+
+
+
+{% endblock %}
