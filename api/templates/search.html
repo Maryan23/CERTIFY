@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="container-fluiid searchlearner" style="min-height: 80vh;">
+    <div class="container">
+        <div class="row">
+            <div class="row text-center">
+                {% if learners %}
+                  <h2 class="text-center">Found {{ learners|length }} of searched name {{message}}</h2>
+                {% else %}
+                  <h4 class="text-center">Found 0 learners for the search name {{message}}</h4>
+                {% endif %}
+              
+            </div>
+            {% for learner in learners %}
+            <div class="col-md-5 search">
+                <br>
+                <div class="flex">
+                    <div>
+                        <h4 class="text-center">{{ learner.first_name}} {{ learner.second_name}} {{ learner.last_name}}</h4>
+                        <img src="{{learner.learner_image.url}}" class="card-img-top" alt="img" width="320" height="300">
+                    </div>
+                </div>
+                <hr>
+                {% endfor %}
+            </div>
+            <div class="col-md-7">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'bootstrap4',
     'rest_framework',
     'cloudinary',
     'rest_framework.authtoken',
@@ -111,10 +112,9 @@ DATABASES = {
 # Cloudinary
 #Configuring cloudinary
 cloudinary.config(
-    cloud_name = config('CD_NAME'),
-    api_key= config('CD_API'),
-    api_secret=config('CD_SECRET'),
-    secure = config('CD_SECURE')
+    cloud_name =config('CLOUD_NAME'),
+    api_key= config('CLOUD_API_KEY'),
+    api_secret=config('API_SECRET'),
 )
 
 

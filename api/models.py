@@ -91,3 +91,7 @@ class Learner(models.Model):
     def delete_learner(self):
         self.delete()   
     
+    @classmethod
+    def search_by_learner_name(cls, search_term):
+        learner = cls.objects.filter(first_name__icontains=search_term)
+        return learner
