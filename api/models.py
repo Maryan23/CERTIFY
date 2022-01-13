@@ -87,7 +87,7 @@ class Learner(models.Model):
     certificates = models.ForeignKey(Certificate , on_delete=CASCADE , null=True)
     institution = models.ForeignKey(Institution, on_delete=CASCADE , null=True)
     def _str_(self):
-        return self.first_name 
+        return self.user.username
     
     def save_learner(self):
         self.save()

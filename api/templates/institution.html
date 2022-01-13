@@ -1,42 +1,51 @@
+{% extends 'base.html'%}
 {% load bootstrap4 %}
-{% load static%}
-<div class="container">
-    <div class="row">
-        <div class="col-3" style="background-color:#89A6A8 ;">
-            <div id="info">
-                <h1>Institution Info</h1>
-                <h3>Institution Name: {{institution.institution_name}}</h3>
-                <h3>Institution No: {{institution.reg_no}}</h3>
-                <h3>Institution Location: {{institution.location}}</h3>
-            </div>
+{% block content%}
+<br>
+<div class="container"style="min-height:70vh" >
+    <div class="col-md-12" style="background-color:#89A6A8 ;">
+        <div id="info">
+            <h1 align="center">Institution Info</h1>
+            <h3 align="center">Institution Name: {{institution.institution_name}}</h3>
+            <h3 align="center">Institution No: {{institution.reg_no}}</h3>
+            <h3 align="center">Institution Location: {{institution.location}}</h3>
         </div>
-        <div class="col-9" id="graduate">
-            <ul>
-                <li *ngFor='let graduate of graduates'>
-                    <div class="row">
-                        <div class="col-1">
-                            <img src="https://cdn2.vectorstock.com/i/1000x1000/20/76/man-avatar-profile-vector-21372076.jpg" height="45px" width="45px" alt="">
-                        </div>
-                        <div class="col-6">
-                            <div class="name">
-                                <h3>{{learner.firstname}} {{learner.lastname}}</h3>
-                            </div>
-                            <div class="certificate">
-                                <h3>{{learner.certificate}}</h3>
-                            </div>
-                            <div class="row">
-                                <div>
-                                    <button type="button" id="view" class="btn btn-info">View</button>
-                                    <button type="button" id="delete" class="btn btn-danger">Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-            <div id="create">
-                <button type="button" id="create" class="btn btn-success">Create Learner</button>
-            </div>
+    </div>  
+    <div class="card-group">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Dancun Muhadi</h5>
+            <p class="card-text">Registration No. : 1891</p>
+            <p class="card-text">Course taken: Software Development Certificate </p>
+            <p class="card-text">Grade attained: Outstanding</p>
         </div>
-    </div>
+          <div class="card-footer">
+            <small class="text-muted">Completed 5 months ago</small>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Kevson Njuguna</h5>
+            <p class="card-text">Registration No. : 1892</p>
+            <p class="card-text">Course taken: Software Development Certificate </p>
+            <p class="card-text">Grade attained: Outstanding </p>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Completed 1 year ago</small>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Gideon Ngetich</h5>
+            <p class="card-text">Registration No. : 1893</p>
+            <p class="card-text">Course taken: Software Development Certificate </p>
+            <p class="card-text">Grade attained: Outstanding</p>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Completed 2 months ago</small>
+          </div>
+        </div>
+      </div> 
 </div>
+
+{% endblock %}
