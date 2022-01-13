@@ -11,6 +11,6 @@ urlpatterns=[
     path('logout/',views.logout, name = 'logout'),
     path('institution/' ,views.institution ,name='institution'),
     path('create_learner/',views.create_learner,name = 'create_learner'),
-
-
+    path('employer/<int:id>/', views.employer, name='employer'),
+    path('search',views.search, name='search'),
 ]
