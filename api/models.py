@@ -3,8 +3,8 @@ from django.contrib.auth.models import AbstractUser
 from cloudinary.models import CloudinaryField
 from django.db import models
 from django.db.models.deletion import CASCADE
-from django.db.models.lookups import In
-
+from django.contrib.auth.models import User
+from tinymce.models import HTMLField
 # Create your models here.
 class User(AbstractUser):
     is_employer = models.BooleanField(default=False)
@@ -91,3 +91,7 @@ class Learner(models.Model):
     def delete_learner(self):
         self.delete()   
     
+    @classmethod
+    def filter_by_id(cls, id):
+        found_learner = cls.objects.filter(id = id)
+        return found_learner

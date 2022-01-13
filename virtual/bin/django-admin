@@ -1,6 +1,4 @@
-#!/bin/sh
-'''exec' "/home/kevson/Desktop/Core/Django/Group Project/CERTIFY/virtual/bin/python" "$0" "$@"
-' '''
+#!/home/khalyz/Pictures/CERTIFY/virtual/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
