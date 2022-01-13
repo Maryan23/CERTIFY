@@ -1,4 +1,4 @@
 .env
-venv/
+virtual/
 *.pyc
 __pycache__
