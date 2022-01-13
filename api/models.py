@@ -15,10 +15,10 @@ class User(AbstractUser):
 class Employer(models.Model):
     logo = CloudinaryField('logo')
     company_name = models.CharField(max_length=50)
-    about = models.TextField(max_length=1000, blank=True)
-    tel_number = models.IntegerField()
+    about = models.TextField(max_length=1000)
+    tel_number = models.IntegerField(null=True)
     email = models.EmailField()
-    reg_number = models.CharField(max_length=20)
+    reg_number = models.CharField(max_length=20,unique=True)
     joined_on = models.DateTimeField(auto_now_add=True,null=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE,null=True)
 
@@ -29,7 +29,7 @@ class Employer(models.Model):
         self.save()
     
     def __str__(self):
-        return self.company_name
+        return self.user.username
 
 
 class Institution(models.Model):
@@ -48,7 +48,7 @@ class Institution(models.Model):
         self.delete()
     
     def __str__(self):
-        return self.institution_name
+        return self.user.username
     
     @classmethod
     def get_institution_by_name(cls, search_term):

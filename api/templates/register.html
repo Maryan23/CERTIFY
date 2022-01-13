@@ -1,0 +1,9 @@
+{%extends 'base.html'%}
+{% block content%}
+<div class="container">
+    <h1>Sign Up Here</h1>
+    <button class="btn btn-sm btn-danger mt-4"><a style="color: white;" href="{% url 'employer_signup'%}">Employer Sign Up</a></button>
+    <button class="btn btn-sm btn-danger mt-4"><a style="color: white;" href="{% url 'institution_signup'%}">Institution Sign Up</a></button>
+
+</div>
+{% endblock %}

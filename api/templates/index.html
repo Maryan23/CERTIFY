@@ -1,1 +1,6 @@
-<h1>WELCOME TO CERTIFY!</h1>
+{% extends 'base.html' %}
+{% block content %}
+<h1 align="center">WELCOME TO CERTIFY</h1>
+<button style="margin-left: 42%;" class="btn btn-sm btn-danger mt-4"><a style="color: white;" href="{% url 'Signup'%}">Click to Sign Up as an Institution or Employer</a></button>
+
+{% endblock %}
