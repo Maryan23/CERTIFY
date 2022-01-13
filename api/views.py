@@ -50,7 +50,7 @@ def login_view(request):
       user = authenticate(username=username,password=password)
       if user is not None and user.is_employer:
         login(request, user)
-        return redirect('home')
+        return redirect('employer')
       elif user is not None and user.is_institution:
         login(request, user)
         return redirect('institution')
@@ -62,7 +62,6 @@ def logout(request):
 
 def institution(request):
   return render(request,'institution.html' )
-
 
 def create_learner(request):
   current_user = request.user
