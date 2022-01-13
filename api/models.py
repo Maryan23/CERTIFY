@@ -3,7 +3,6 @@ from django.contrib.auth.models import AbstractUser
 from cloudinary.models import CloudinaryField
 from django.db import models
 from django.db.models.deletion import CASCADE
-from django.db.models.lookups import In                  
 
 # Create your models here.
 class User(AbstractUser):
@@ -88,7 +87,7 @@ class Learner(models.Model):
     certificates = models.ForeignKey(Certificate , on_delete=CASCADE , null=True)
     institution = models.ForeignKey(Institution, on_delete=CASCADE , null=True)
     def _str_(self):
-        return self.first_name 
+        return self.user.username
     
     def save_learner(self):
         self.save()
@@ -97,6 +96,10 @@ class Learner(models.Model):
         self.delete()   
     
     @classmethod
+    def filter_by_id(cls, id):
+        found_learner = cls.objects.filter(id = id)
+        return found_learner
+        
     def search_by_learner_name(cls, search_term):
         learner = cls.objects.filter(first_name__icontains=search_term)
         return learner

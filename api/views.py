@@ -1,3 +1,6 @@
+from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib import auth
 from django.shortcuts import render,redirect
@@ -5,11 +8,18 @@ from .forms import EmployerSignUpForm,InstitutionSignUpForm,LoginForm,LearnerFor
 from api.models import *
 from django.contrib.auth import authenticate, login
 from django.views.generic import CreateView
-from django.contrib.auth.decorators import login_required
 
 #Create your views
 def index(request):
   return render(request,'index.html' )
+
+@login_required(login_url='/accounts/login')
+def learner(request, learner_id):
+    try:
+        learner = Learner.filter_by_id(id=learner_id)
+    except Learner.DoesNotExist:
+        raise Http404()
+    return render(request, "learner.html",{"learner":learner} )
 
 def SignUp(request):
     return render(request,'register.html')
@@ -59,9 +69,6 @@ def logout(request):
   auth.logout(request)
   return redirect ('/')
 
-def institution(request):
-  return render(request,'institution.html' )
-
 def create_learner(request):
   current_user = request.user
   title = "Create Learner"
@@ -79,11 +86,9 @@ def create_learner(request):
 
 
 @login_required
-def employer(request, id):
-    employer = Employer.objects.get(id=id)
-    certificates = Certificate.objects.filter(id = id)
-    current_user = request.user
-    return render(request, 'employer.html', {'certificates': certificates, 'employer': employer, 'current_user':current_user})
+def employer(request):
+    employer = Employer.objects.get()
+    return render(request, 'employer.html', {'employer': employer})
 
 
 @login_required
@@ -99,14 +104,14 @@ def search(request):
         return render(request, 'search.html', {'message': message})
 
 def institution(request):
-  # institution = Institution.filter_by_reg_no(reg_no)
+  institution = Institution.objects.get()
   return render(request,'institution.html',{"institution":institution})
 
 def learner(request, learner_id):
     current_user = request.user
     learner = Learner.objects.get(id=learner_id)
     learner = Learner.objects.filter(learner=learner)
-    return render(request, 'intitution.html', {'current_user':current_user, 'institution':institution,'learner':learner})
+    return render(request, 'institution.html', {'current_user':current_user, 'institution':institution,'learner':learner})
 
 def create_learner(request):
     if request.method == 'POST':
