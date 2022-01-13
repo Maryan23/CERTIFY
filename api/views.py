@@ -1,5 +1,6 @@
+from django.contrib import auth
 from django.shortcuts import render,redirect
-from .forms import EmployerSignUpForm,InstitutionSignUpForm,LoginForm
+from .forms import EmployerSignUpForm,InstitutionSignUpForm,LoginForm,LearnerForm
 from .models import *
 from django.contrib.auth import authenticate, login
 from django.views.generic import CreateView
@@ -50,23 +51,28 @@ def login_view(request):
         return redirect('home')
       elif user is not None and user.is_institution:
         login(request, user)
-        return redirect('home')
+        return redirect('institution')
   return render (request, 'login.html',{'form':form})
 
-def home(request):
-  return render(request,'home.html' )
+def logout(request):
+  auth.logout(request)
+  return redirect ('/')
+
+def institution(request):
+  return render(request,'institution.html' )
+
 
 def create_learner(request):
   current_user = request.user
   title = "Create Learner"
   if request.method == 'POST':
-      learner_form = ProfileForm(request.POST, request.FILES)
+      learner_form = LearnerForm(request.POST, request.FILES)
       if learner_form.is_valid():
           learner = learner_form.save(commit=False)
           learner.user = current_user
           learner.save()
-      return HttpResponseRedirect('/')
+      return redirect('institution')
 
   else:
-      learner_form = ProfileForm()
+      learner_form = LearnerForm()
   return render(request, 'create_learner.html', {"learner_form": learner_form, "title": title})

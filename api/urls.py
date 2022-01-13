@@ -8,7 +8,9 @@ urlpatterns=[
     path('accounts/signup/employer/',views.EmployerSignUpView.as_view(), name = 'employer_signup'),
     path('accounts/signup/institution/',views.InstitutionSignUpView.as_view(), name = 'institution_signup'),
     path('login/',views.login_view, name = 'login_view'),
-    path('home' ,views.home ,name='home'),
+    path('logout/',views.logout, name = 'logout'),
+    path('institution/' ,views.institution ,name='institution'),
+    path('create_learner/',views.create_learner,name = 'create_learner'),
 
 
 ]

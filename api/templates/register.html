@@ -1,9 +1,9 @@
 {%extends 'base.html'%}
 {% block content%}
-<div class="container">
-    <h1>Sign Up Here</h1>
-    <button class="btn btn-sm btn-danger mt-4"><a style="color: white;" href="{% url 'employer_signup'%}">Employer Sign Up</a></button>
-    <button class="btn btn-sm btn-danger mt-4"><a style="color: white;" href="{% url 'institution_signup'%}">Institution Sign Up</a></button>
+<div class="container"style="margin-top:10%;color:white;margin-left:40%;background-color: blue; width:max-content ;border-style:ridge ;box-shadow: 0 3px 10px rgb(0 0 0/1);">
+    <h1 style="margin-top:10%;">Sign Up Here</h1>
+    <button style="margin-left:23%;"class="btn btn-sm btn-danger mt-4"><a style="color: white;" href="{% url 'employer_signup'%}">Employer Sign Up</a></button><br>
+    <button style="margin-left:23%;"class="btn btn-sm btn-danger mt-4"><a style="color: white;" href="{% url 'institution_signup'%}">Institution Sign Up</a></button>
 
 </div>
 {% endblock %}

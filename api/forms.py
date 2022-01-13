@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
 from .models import *
+from django.forms import ModelForm
 
 class EmployerSignUpForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -66,3 +67,8 @@ class LoginForm(forms.Form):
             }
         )
     )
+
+class LearnerForm(ModelForm):
+    class Meta:
+        model = Learner
+        exclude = ['certificates','institution']
