@@ -8,8 +8,8 @@ from django.contrib import messages
 def index(request):
   return render(request,'index.html')
 
-def institution(request, reg_no):
-  institution = Institution.filter_by_reg_no(reg_no)
+def institution(request):
+  # institution = Institution.filter_by_reg_no(reg_no)
   return render(request,'institution.html',{"institution":institution})
 
 def learner(request, learner_id):
