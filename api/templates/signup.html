@@ -5,7 +5,7 @@
 <form method="POST" accept-charset="utf-8">
     {% csrf_token %}
     {{form.as_p}}
-    <button type="submit" style="background-color: red;" class="btn btn-sm btn-danger">Sign Up</button>
+    <button type="submit" style="background-color: #89A6A8;" class="btn btn-sm btn-danger">Sign Up</button>
 </form>
 Have an account? <br>
 <a class="nav-link" style="color:red" href="{% url 'login_view'%}" >Login Here</a>
