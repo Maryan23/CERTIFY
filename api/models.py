@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from cloudinary.models import CloudinaryField
 from django.db import models
 from django.db.models.deletion import CASCADE
-from django.db.models.lookups import In
+from django.db.models.lookups import In                  
 
 # Create your models here.
 class User(AbstractUser):
@@ -18,7 +18,7 @@ class Employer(models.Model):
     about = models.TextField(max_length=1000)
     tel_number = models.IntegerField(null=True)
     email = models.EmailField()
-    reg_number = models.CharField(max_length=20,unique=True)
+    reg_number = models.CharField(max_length=20)
     joined_on = models.DateTimeField(auto_now_add=True,null=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE,null=True)
 
