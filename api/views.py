@@ -11,8 +11,11 @@ from django.views.generic import CreateView
 
 #Create your views
 def index(request):
-  return render(request,'index.html' )
+  return render(request,'index.html')
 
+def about(request):
+  return render(request,'about.html' )
+  
 @login_required(login_url='/accounts/login')
 def learner(request, learner_id):
     try:

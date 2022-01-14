@@ -1,4 +1,5 @@
 from django.urls import path
+from django.conf.urls import url
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -7,6 +8,7 @@ from django.conf.urls.static import static
 
 urlpatterns=[
     path('' ,views.index ,name='index'),
+    url(r'^about/$', views.about, name='about'),
     path('learner/<learner_id>',views.learner,name ='learner'),
     path('signup/',views.SignUp,name = 'Signup'),
     path('accounts/signup/employer/',views.EmployerSignUpView.as_view(), name = 'employer_signup'),

@@ -39,12 +39,16 @@ class Institution(models.Model):
     email = models.EmailField()
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
 
-    
     def save_institution(self):
         self.save()
     
     def delete_institution(self):
         self.delete()
+        
+    @classmethod
+    def filter_by_reg_no(cls, reg_no):
+        found_institution = cls.objects.filter(reg_no = reg_no)
+        return found_institution
     
     def __str__(self):
         return self.user.username

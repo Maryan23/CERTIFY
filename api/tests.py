@@ -1,5 +1,6 @@
-# from django.test import TestCase
-# from .models import Employer,Institution,Learner
+from django.test import TestCase
+from .models import Employer,Institution,Learner, User
+
 # from django.contrib.auth.models import User
 
 
@@ -32,27 +33,33 @@
 #         employer = Employer.search_by_company_name(user)
 #         self.assertFalse(len(employer)>0)
 
-# class InstitutionTestCase(TestCase):
-#   # Set up method
-#   def setUp(self):
-#     self.institution = Institution(institution_reg_no = 'smmq/00124/2016', institution_name = 'Phoenix Developers',institution_email = 'contact@phoenixdevelopers.com', location_name = 'Upper Hill', location_address = '053-100 Nairobi')
+class InstitutionTestCase(TestCase):
+  # Set up method
+  def setUp(self):
+    user, created = User.objects.get_or_create(username = 'kevson', email='kevson102@gmail.com', password ='password')
+    self.institution = Institution(reg_no = 'smmq/00124/2016', institution_name = 'Moringa School',location = 'Ngong road', location_address = '053-100 Nairobi', email='contact@moringa.com', user = user)
     
-#   # Test instance
-#   def test_instance(self):
-#     self.assertTrue(isinstance(self.institution, Institution))
+  # Test instance
+  def test_instance(self):
+    self.assertTrue(isinstance(self.institution, Institution))
+  
+  def test_display_institution_details(self):
+    self.institution.save()
+    institution_info = Institution.filter_by_reg_no('smmq/00124/2016')
+    self.assertTrue(len(institution_info)==1)
     
-#   # Test save institution
-#   def test_save_institution(self):
-#     self.institution.save_institution()
-#     saved_institutions = Institution.objects.all()
-#     self.assertTrue(len(saved_institutions)==1)
+  # # Test save institution
+  # def test_save_institution(self):
+  #   self.institution.save_institution()
+  #   saved_institutions = Institution.objects.all()
+  #   self.assertTrue(len(saved_institutions)==1)
     
-#   # Test delete institution
-#   def test_delete_institution(self):
-#     self.institution.save_institution()
-#     self.institution.delete_institution()
-#     saved_institutions = Institution.objects.all()
-#     self.assertTrue(len(saved_institutions)==0)
+  # # Test delete institution
+  # def test_delete_institution(self):
+  #   self.institution.save_institution()
+  #   self.institution.delete_institution()
+  #   saved_institutions = Institution.objects.all()
+  #   self.assertTrue(len(saved_institutions)==0)
     
 # class LearnerTestCase(TestCase):
 #   # Set up method
